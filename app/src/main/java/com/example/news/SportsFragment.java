@@ -70,7 +70,7 @@ public class SportsFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
 //        progressBar.setVisibility(View.VISIBLE);
-//        textView.setVisibility(View.GONE);
+        textView.setVisibility(View.GONE);
         return new NewsLoader(getActivity(), url);
     }
 

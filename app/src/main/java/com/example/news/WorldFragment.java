@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -30,11 +32,16 @@ public class WorldFragment extends Fragment implements LoaderManager.LoaderCallb
     private ProgressBar progressBar;
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        listView = view.findViewById(R.id.list);
+        textView = view.findViewById(R.id.text);
+        progressBar = view.findViewById(R.id.prgressbar);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.word_list, container, false);
-
-        init(rootView);
 
         //To check network connection is there or not.
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -64,22 +71,16 @@ public class WorldFragment extends Fragment implements LoaderManager.LoaderCallb
         return rootView;
     }
 
-    private void init(View rootView) {
-        listView = rootView.findViewById(R.id.list);
-        textView = rootView.findViewById(R.id.text);
-        progressBar = rootView.findViewById(R.id.prgressbar);
-    }
-
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-//        progressBar.setVisibility(View.VISIBLE);
-//        textView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.GONE);
         return new NewsLoader(getActivity(), url);
     }
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
-//        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
         adapter.clear();
         if (data != null && !data.isEmpty())
             adapter.addAll(data);
