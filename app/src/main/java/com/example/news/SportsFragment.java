@@ -36,7 +36,7 @@ public class SportsFragment extends Fragment implements LoaderManager.LoaderCall
 
         listView = rootView.findViewById(R.id.list);
         textView = rootView.findViewById(R.id.text);
-        progressBar = rootView.findViewById(R.id.prgressbar);
+        progressBar = rootView.findViewById(R.id.progressbar);
 
         //To check network connection is there or not.
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -69,14 +69,14 @@ public class SportsFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-//        progressBar.setVisibility(View.VISIBLE);
-        textView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        textView.setVisibility  (View.GONE);
         return new NewsLoader(getActivity(), url);
     }
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
-//        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
         adapter.clear();
         if (data != null && !data.isEmpty())
             adapter.addAll(data);

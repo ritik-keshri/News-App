@@ -32,16 +32,13 @@ public class WorldFragment extends Fragment implements LoaderManager.LoaderCallb
     private ProgressBar progressBar;
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        listView = view.findViewById(R.id.list);
-        textView = view.findViewById(R.id.text);
-        progressBar = view.findViewById(R.id.prgressbar);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.word_list, container, false);
+
+        listView = rootView.findViewById(R.id.list);
+        textView = rootView.findViewById(R.id.text);
+        progressBar = rootView.findViewById(R.id.progressbar);
 
         //To check network connection is there or not.
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);

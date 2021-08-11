@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,7 @@ public class BusinessFragment extends Fragment implements LoaderManager.LoaderCa
 
         listView = rootView.findViewById(R.id.list);
         textView = rootView.findViewById(R.id.text);
-        progressBar = rootView.findViewById(R.id.prgressbar);
+        progressBar = rootView.findViewById(R.id.progressbar);
 
         //To check network connection is there or not.
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -70,14 +69,14 @@ public class BusinessFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-//        progressBar.setVisibility(View.VISIBLE);
-//        textView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.GONE);
         return new NewsLoader(getActivity(), url);
     }
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
-//        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
         adapter.clear();
         if (data != null && !data.isEmpty())
             adapter.addAll(data);
